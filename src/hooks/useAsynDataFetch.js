@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-const useErrors = ({ fetchFn = null, loadOnMount = false }) => {
+const useAsynDataFetch = ({ fetchFn = null, loadOnMount = false }) => {
   const [data, setData] = useState({});
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -26,4 +26,4 @@ const useErrors = ({ fetchFn = null, loadOnMount = false }) => {
   return { data, isLoading, error, loadData };
 };
 
-export default useErrors;
+export default useAsynDataFetch;

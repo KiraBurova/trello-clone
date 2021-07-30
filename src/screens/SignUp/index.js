@@ -4,11 +4,11 @@ import { Container } from './styles/sigup';
 
 import firebase from '../../lib/firebase.prod';
 
-import useErrors from '../../hooks/useErrors';
+import useAsynDataFetch from '../../hooks/useAsynDataFetch';
 
 const SignUpScreen = () => {
   const [formValues, setFormValues] = useState({});
-  const { data, isLoading, error, loadData } = useErrors({
+  const { data, isLoading, error, loadData } = useAsynDataFetch({
     fetchFn: () => registerUser(),
     loadOnMount: false,
   });
