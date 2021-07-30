@@ -3,14 +3,14 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APPAUTH_DOMAIN,
+  projectId: process.env.REACT_APPPROJECT_ID,
+  storageBucket: process.env.REACT_APPSTORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APPMESSAGING_SENDER_ID,
+  appId: process.env.REACT_APPAPP_ID,
 };
 
 const firebase = Firebase.initializeApp(config);
 
-export { firebase };
+export default firebase;

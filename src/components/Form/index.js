@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { Container, Input, Button, Title } from './styles/form';
+import { Container, Input, Button, Title, ErrorText } from './styles/form';
 
-const Form = ({ formTitle, buttonTitle }) => {
+const Form = ({ formTitle, buttonTitle, handleSumbit, handleOnChange, errorText }) => {
   return (
-    <Container>
+    <Container onSubmit={handleSumbit}>
       <Title>{formTitle}</Title>
-      <Input placeholder='email'></Input>
-      <Input placeholder='password'></Input>
+      <Input placeholder='email' name='email' onChange={handleOnChange}></Input>
+      <Input placeholder='password' name='password' type='password' onChange={handleOnChange}></Input>
       <Button>{buttonTitle}</Button>
+      <ErrorText>{errorText}</ErrorText>
     </Container>
   );
 };
