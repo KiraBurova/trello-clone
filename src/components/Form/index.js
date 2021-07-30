@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Container, Input, Button, Title, ErrorText } from './styles/form';
+import { Container, Input, Button, Title, ErrorText, LoadingText } from './styles/form';
 
-const Form = ({ formTitle, buttonTitle, handleSumbit, handleOnChange, errorText }) => {
+const Form = ({ formTitle, buttonTitle, handleSumbit, handleOnChange, errorText, loading }) => {
   return (
     <Container onSubmit={handleSumbit}>
       <Title>{formTitle}</Title>
@@ -10,6 +10,7 @@ const Form = ({ formTitle, buttonTitle, handleSumbit, handleOnChange, errorText 
       <Input placeholder='password' name='password' type='password' onChange={handleOnChange}></Input>
       <Button>{buttonTitle}</Button>
       <ErrorText>{errorText}</ErrorText>
+      <LoadingText>{loading}</LoadingText>
     </Container>
   );
 };

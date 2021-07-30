@@ -27,3 +27,8 @@ export const ErrorText = styled.p`
   text-align: center;
   color: red;
 `;
+
+export const LoadingText = styled.p`
+  font-size: 1.2rem;
+  text-align: center;
+`;

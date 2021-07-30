@@ -8,24 +8,30 @@ import useErrors from '../../hooks/useErrors';
 
 const SignUpScreen = () => {
   const [formValues, setFormValues] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useErrors(formValues, submitted);
+  const { data, isLoading, error, loadData } = useErrors({
+    fetchFn: () => registerUser(),
+    loadOnMount: false,
+  });
+
+  const registerUser = () => {
+    const { email, password } = formValues;
+    return new Promise((resolve, reject) => {
+      return firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+        .then((userCredentials) => {
+          const user = userCredentials.user;
+          resolve(user);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    const { email, password } = formValues;
-
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log(user);
-      })
-      .catch((error) => {
-        setErrors(error.message);
-      })
-      .then(() => setSubmitted(true));
+    loadData();
   };
 
   const handleOnChange = (e) => {
@@ -39,7 +45,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Sign Up' errorText={errors} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Sign Up' errorText={error} loading={isLoading} />
     </Container>
   );
 };

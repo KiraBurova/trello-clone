@@ -1,21 +1,29 @@
 import { useEffect, useState } from 'react';
 
-const useErrors = (values, submitted) => {
-  const [errors, setErrors] = useState('');
+const useErrors = ({ fetchFn = null, loadOnMount = false }) => {
+  const [data, setData] = useState({});
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loadData = async () => {
+    setIsLoading(true);
+
+    return fetchFn()
+      .then((response) => {
+        setData(response);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setIsLoading(false);
+      });
+  };
 
   useEffect(() => {
-    Object.entries(values).forEach(([key, value]) => {
-      if (key === 'password') {
-        if (value.length < 5) {
-          setErrors('Password should be no less than 6 characters');
-        } else {
-          setErrors('');
-        }
-      }
-    });
-  }, [submitted]);
+    if (loadOnMount && fetchFn !== null) loadData();
+  }, [loadOnMount]);
 
-  return [errors, setErrors];
+  return { data, isLoading, error, loadData };
 };
 
 export default useErrors;
