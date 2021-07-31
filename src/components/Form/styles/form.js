@@ -8,7 +8,6 @@ export const Container = styled.form`
   width: 25em;
   font-size: 1rem;
   padding: 0.625em 4em;
-  border: 0.0625em solid var(--main-dark);
   border-radius: var(--radius);
   box-sizing: border-box;
   color: var(--main-light);
