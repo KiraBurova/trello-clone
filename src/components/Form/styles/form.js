@@ -11,7 +11,9 @@ export const Container = styled.form`
   border: 0.0625em solid var(--main-dark);
   border-radius: var(--radius);
   box-sizing: border-box;
-  color: var(--main-dark);
+  color: var(--main-light);
+  background: var(--additional);
+  background: linear-gradient(45deg, var(--additional) 0%, var(--accent) 88%);
 `;
 
 export const Title = styled.h2`
@@ -34,7 +36,7 @@ export const Button = styled.button`
   padding: 0.625em;
   border-radius: var(--radius);
   border: none;
-  background-color: var(--accent);
+  background-color: var(--main-dark);
   color: var(--main-light);
   font-weight: bold;
   font-size: 1.1rem;
@@ -43,6 +45,11 @@ export const Button = styled.button`
 
   &:hover {
     background-color: var(--darken-accent);
+  }
+
+  &:disabled {
+    background-color: var(--disabled);
+    cursor: default;
   }
 `;
 

@@ -16,13 +16,12 @@ export const GlobalStyles = createGlobalStyle`
 
         --main-dark: #1E212B;
         --main-light: #FFFFFF;
-        --accent: #FF8427;
-        --darken-accent: #ED7A24;
-        --additional-accent: #43AA8B;
+        --darken-accent: #07080A;
+        --accent: #43AA8B;
+        --additional: #FFC800;
+        
         --error: #D63230;
         --disabled: #E8E9EB;
-
-        --additional: #FFC800;
 
         --radius: 5px;
     }

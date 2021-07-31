@@ -8,9 +8,13 @@ import firebase from '../../lib/firebase.prod';
 
 import useAsyncDataFetch from '../../hooks/useAsyncDataFetch';
 
+import { checkIfFormIsValid } from '../../helpers';
+import { ROUTES } from '../../constants';
+
 const SignUpScreen = () => {
   const history = useHistory();
   const [formValues, setFormValues] = useState({});
+  const isValid = checkIfFormIsValid(formValues);
   const { isLoading, error, loadData } = useAsyncDataFetch({
     fetchFn: () => signUpUser(),
     loadOnMount: false,
@@ -25,7 +29,7 @@ const SignUpScreen = () => {
         .then((userCredentials) => {
           const user = userCredentials.user;
           resolve(user);
-          history.push('/signin');
+          history.push(ROUTES.SIGNIN);
         })
         .catch((error) => {
           reject(error);
@@ -49,7 +53,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error} loading={isLoading} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error} loading={isLoading} isValid={isValid} />
     </Container>
   );
 };

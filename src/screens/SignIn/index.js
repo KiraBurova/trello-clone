@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Form from '../../components/Form';
 import { Container } from './styles/signin';
@@ -7,8 +8,13 @@ import firebase from '../../lib/firebase.prod';
 
 import useAsyncDataFetch from '../../hooks/useAsyncDataFetch';
 
+import { checkIfFormIsValid } from '../../helpers';
+import { ROUTES } from '../../constants';
+
 const SignUpScreen = () => {
+  const history = useHistory();
   const [formValues, setFormValues] = useState({});
+  const isValid = checkIfFormIsValid(formValues);
   const { isLoading, error, loadData } = useAsyncDataFetch({
     fetchFn: () => signInUser(),
     loadOnMount: false,
@@ -23,6 +29,7 @@ const SignUpScreen = () => {
         .then((userCredentials) => {
           const user = userCredentials.user;
           resolve(user);
+          history.push(ROUTES.DASHBOARD);
         })
         .catch((error) => {
           reject(error);
@@ -46,7 +53,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign In' formTitle='Sign In' errorText={error} loading={isLoading} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign In' formTitle='Sign In' errorText={error} loading={isLoading} isValid={isValid} />
     </Container>
   );
 };
