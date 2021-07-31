@@ -49,7 +49,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Sign Up' errorText={error} loading={isLoading} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error} loading={isLoading} />
     </Container>
   );
 };
