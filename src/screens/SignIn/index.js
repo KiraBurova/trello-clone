@@ -5,11 +5,11 @@ import { Container } from './styles/signin';
 
 import firebase from '../../lib/firebase.prod';
 
-import useAsynDataFetch from '../../hooks/useAsynDataFetch';
+import useAsyncDataFetch from '../../hooks/useAsyncDataFetch';
 
 const SignUpScreen = () => {
   const [formValues, setFormValues] = useState({});
-  const { isLoading, error, loadData } = useAsynDataFetch({
+  const { isLoading, error, loadData } = useAsyncDataFetch({
     fetchFn: () => signInUser(),
     loadOnMount: false,
   });

@@ -6,12 +6,12 @@ import { Container } from './styles/sigup';
 
 import firebase from '../../lib/firebase.prod';
 
-import useAsynDataFetch from '../../hooks/useAsynDataFetch';
+import useAsyncDataFetch from '../../hooks/useAsyncDataFetch';
 
 const SignUpScreen = () => {
   const history = useHistory();
   const [formValues, setFormValues] = useState({});
-  const { isLoading, error, loadData } = useAsynDataFetch({
+  const { isLoading, error, loadData } = useAsyncDataFetch({
     fetchFn: () => signUpUser(),
     loadOnMount: false,
   });
