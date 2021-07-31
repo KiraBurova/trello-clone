@@ -28,7 +28,7 @@ export const Button = styled.button`
 `;
 
 export const ErrorText = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   text-align: center;
   color: red;
   word-wrap: break-word;

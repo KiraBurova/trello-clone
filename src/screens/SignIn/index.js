@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Form from '../../components/Form';
-import { Container } from './styles/sigup';
+import { Container } from './styles/signin';
 
 import firebase from '../../lib/firebase.prod';
 
 import useAsynDataFetch from '../../hooks/useAsynDataFetch';
 
 const SignUpScreen = () => {
-  const history = useHistory();
   const [formValues, setFormValues] = useState({});
   const { isLoading, error, loadData } = useAsynDataFetch({
-    fetchFn: () => registerUser(),
+    fetchFn: () => signinUser(),
     loadOnMount: false,
   });
 
-  const registerUser = () => {
+  const signinUser = () => {
     const { email, password } = formValues;
     return new Promise((resolve, reject) => {
       return firebase
@@ -25,7 +23,6 @@ const SignUpScreen = () => {
         .then((userCredentials) => {
           const user = userCredentials.user;
           resolve(user);
-          history.push('/signin');
         })
         .catch((error) => {
           reject(error);
@@ -49,7 +46,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Sign Up' errorText={error} loading={isLoading} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign In' formTitle='Sign In' errorText={error} loading={isLoading} />
     </Container>
   );
 };

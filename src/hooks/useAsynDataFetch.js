@@ -7,6 +7,7 @@ const useAsynDataFetch = ({ fetchFn = null, loadOnMount = false }) => {
 
   const loadData = async () => {
     setIsLoading(true);
+    setError('');
 
     return fetchFn()
       .then((response) => {
@@ -21,6 +22,8 @@ const useAsynDataFetch = ({ fetchFn = null, loadOnMount = false }) => {
 
   useEffect(() => {
     if (loadOnMount && fetchFn !== null) loadData();
+    //:todo fix
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadOnMount]);
 
   return { data, isLoading, error, loadData };
