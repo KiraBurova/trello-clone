@@ -12,11 +12,11 @@ const SignUpScreen = () => {
   const history = useHistory();
   const [formValues, setFormValues] = useState({});
   const { isLoading, error, loadData } = useAsynDataFetch({
-    fetchFn: () => registerUser(),
+    fetchFn: () => signUpUser(),
     loadOnMount: false,
   });
 
-  const registerUser = () => {
+  const signUpUser = () => {
     const { email, password } = formValues;
     return new Promise((resolve, reject) => {
       return firebase

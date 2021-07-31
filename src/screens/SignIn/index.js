@@ -10,16 +10,16 @@ import useAsynDataFetch from '../../hooks/useAsynDataFetch';
 const SignUpScreen = () => {
   const [formValues, setFormValues] = useState({});
   const { isLoading, error, loadData } = useAsynDataFetch({
-    fetchFn: () => signinUser(),
+    fetchFn: () => signInUser(),
     loadOnMount: false,
   });
 
-  const signinUser = () => {
+  const signInUser = () => {
     const { email, password } = formValues;
     return new Promise((resolve, reject) => {
       return firebase
         .auth()
-        .createUserWithEmailAndPassword(email, password)
+        .signInWithEmailAndPassword(email, password)
         .then((userCredentials) => {
           const user = userCredentials.user;
           resolve(user);
