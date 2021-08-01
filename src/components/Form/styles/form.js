@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 
-export const Container = styled.form`
+export const Base = styled.form`
   display: flex;
   flex-direction: column;
   text-align: center;

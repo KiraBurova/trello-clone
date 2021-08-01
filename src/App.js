@@ -4,6 +4,7 @@ import { ROUTES } from './constants';
 
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
+import Dashboard from './screens/Dashboard';
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
         </Route>
         <Route exact path={ROUTES.SIGNIN}>
           <SignIn />
+        </Route>
+        <Route exact path={ROUTES.DASHBOARD}>
+          <Dashboard />
         </Route>
       </Switch>
     </Router>

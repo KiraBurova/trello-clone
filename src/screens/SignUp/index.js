@@ -27,9 +27,18 @@ const SignUpScreen = () => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((userCredentials) => {
-          const user = userCredentials.user;
-          resolve(user);
-          history.push(ROUTES.SIGNIN);
+          const userId = userCredentials.user.uid;
+          const userData = { email, uid: userId };
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(userId)
+            .set(userData)
+            .then(() => {
+              resolve(userId);
+              history.push(ROUTES.SIGNIN);
+            })
+            .catch((error) => reject(error));
         })
         .catch((error) => {
           reject(error);
