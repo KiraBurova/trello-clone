@@ -49,12 +49,12 @@
     "collectCoverageFrom": [
       "<rootDir>/src/**/*.js",
       "!<rootDir>/src/**/styles/*.js",
-      "!<rootDir>/src/api/index.js",
-      "!<rootDir>/src/helpers/index.js",
-      "!<rootDir>/src/types/index.js",
-      "!<rootDir>/src/store/store.js",
-      "!<rootDir>/src/store/context.js",
-      "!<rootDir>/src/utils/index.js"
+      "!<rootDir>/src/constants/*.js",
+      "!<rootDir>/src/lib/*.js",
+      "!<rootDir>/src/context/*.js",
+      "!<rootDir>/src/helpers/*.js",
+      "!<rootDir>/src/global-styles.js",
+      "!<rootDir>/src/index.js"
     ],
     "coverageThreshold": {
       "global": {
