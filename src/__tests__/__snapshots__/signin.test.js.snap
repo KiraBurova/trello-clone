@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SignInScreen /> sign ins user 1`] = `
+<div
+  class="signin__Container-sc-1tsapn2-0 cmxyBq"
+>
+  <form
+    class="form__Base-sc-1grfi8t-0 hLGYyj"
+    data-testid="form"
+  >
+    <h2
+      class="form__Title-sc-1grfi8t-1 ekfsMg"
+    >
+      Sign In
+    </h2>
+    <input
+      class="form__Input-sc-1grfi8t-2 czvKJK"
+      name="email"
+      placeholder="Email"
+    />
+    <input
+      class="form__Input-sc-1grfi8t-2 czvKJK"
+      name="password"
+      placeholder="Password"
+      type="password"
+    />
+    <button
+      class="form__Button-sc-1grfi8t-3 ijFtjC"
+      disabled=""
+    >
+      Sign In
+    </button>
+    <p
+      class="form__ErrorText-sc-1grfi8t-4 ioXfqK"
+    />
+    <p
+      class="form__LoadingText-sc-1grfi8t-5 hVQvTy"
+    />
+  </form>
+</div>
+`;

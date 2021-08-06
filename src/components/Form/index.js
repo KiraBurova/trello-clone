@@ -4,7 +4,7 @@ import { Base, Input, Button, Title, ErrorText, LoadingText } from './styles/for
 
 const Form = ({ formTitle, buttonTitle, handleSumbit, handleOnChange, errorText, loading, isValid }) => {
   return (
-    <Base onSubmit={handleSumbit}>
+    <Base onSubmit={handleSumbit} data-testid='form'>
       <Title>{formTitle}</Title>
       <Input placeholder='Email' name='email' onChange={handleOnChange}></Input>
       <Input placeholder='Password' name='password' type='password' onChange={handleOnChange}></Input>

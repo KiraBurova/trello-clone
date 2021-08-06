@@ -3,6 +3,7 @@
 exports[`<Form /> renders 1`] = `
 <form
   class="form__Base-sc-1grfi8t-0 hLGYyj"
+  data-testid="form"
 >
   <h2
     class="form__Title-sc-1grfi8t-1 ekfsMg"
@@ -38,6 +39,7 @@ exports[`<Form /> renders 1`] = `
 exports[`<Form /> renders with disabled button 1`] = `
 <form
   class="form__Base-sc-1grfi8t-0 hLGYyj"
+  data-testid="form"
 >
   <h2
     class="form__Title-sc-1grfi8t-1 ekfsMg"
@@ -71,6 +73,7 @@ exports[`<Form /> renders with disabled button 1`] = `
 exports[`<Form /> renders with error 1`] = `
 <form
   class="form__Base-sc-1grfi8t-0 hLGYyj"
+  data-testid="form"
 >
   <h2
     class="form__Title-sc-1grfi8t-1 ekfsMg"
@@ -104,6 +107,7 @@ exports[`<Form /> renders with error 1`] = `
 exports[`<Form /> renders with loading text 1`] = `
 <form
   class="form__Base-sc-1grfi8t-0 hLGYyj"
+  data-testid="form"
 >
   <h2
     class="form__Title-sc-1grfi8t-1 ekfsMg"

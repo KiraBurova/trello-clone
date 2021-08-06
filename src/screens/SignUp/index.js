@@ -6,7 +6,7 @@ import { Container } from './styles/sigup';
 
 import firebase from '../../lib/firebase.prod';
 
-import useAsyncDataFetch from '../../hooks/useAsyncDataFetch';
+import useMakeAsyncCall from '../../hooks/useMakeAsyncCall';
 
 import { checkIfFormIsValid } from '../../helpers';
 import { ROUTES } from '../../constants';
@@ -15,9 +15,9 @@ const SignUpScreen = () => {
   const history = useHistory();
   const [formValues, setFormValues] = useState({});
   const isValid = checkIfFormIsValid(formValues);
-  const { isLoading, error, loadData } = useAsyncDataFetch({
-    fetchFn: () => signUpUser(),
-    loadOnMount: false,
+  const { error, isLoading, fetchData } = useMakeAsyncCall({
+    asyncFunctionToRun: () => signUpUser(),
+    runOnMount: false,
   });
 
   const signUpUser = () => {
@@ -48,7 +48,7 @@ const SignUpScreen = () => {
 
   const handleSumbit = (e) => {
     e.preventDefault();
-    loadData();
+    fetchData();
   };
 
   const handleOnChange = (e) => {
@@ -62,7 +62,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error} loading={isLoading} isValid={isValid} />
+      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error.message} loading={isLoading} isValid={isValid} />
     </Container>
   );
 };
