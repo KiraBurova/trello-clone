@@ -5,10 +5,12 @@ import { ROUTES } from './constants';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Dashboard from './screens/Dashboard';
+import Header from './components/Header';
 
 const App = () => {
   return (
     <Router>
+      <Header />
       <Switch>
         <Route exact path={ROUTES.ROOT}>
           <SignUp />
