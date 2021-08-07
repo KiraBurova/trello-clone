@@ -2,7 +2,7 @@
 
 exports[`<Button /> renders 1`] = `
 <button
-  class="button__Base-sc-1caough-0 eWKTrv"
+  class="button__Base-sc-1caough-0 bkYVG"
 >
   Click me
 </button>
