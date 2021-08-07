@@ -11,14 +11,14 @@ const Form = ({ formTitle, buttonTitle, onSubmit, handleOnChange, errorText }) =
   } = useForm();
 
   return (
-    <Base onSubmit={handleSubmit(onSubmit)} data-testid='form'>
+    <Base onSubmit={handleSubmit(onSubmit)}>
       <Title>{formTitle}</Title>
-      <Input {...register('email', { required: true })} placeholder='Email' onChange={handleOnChange} />
-      <ErrorText>{errors.email?.type === 'required' && 'Email is required'}</ErrorText>
-      <Input {...register('password', { required: true })} placeholder='Password' type='password' onChange={handleOnChange} />
-      <ErrorText>{errors.password?.type === 'required' && 'Password is required'}</ErrorText>
+      <Input {...register('email', { required: true })} placeholder='Email' />
+      {errors.email && <ErrorText role='alert'>Email is required</ErrorText>}
+      <Input {...register('password', { required: true })} placeholder='Password' type='password' />
+      {errors.password && <ErrorText role='alert'>Password is required</ErrorText>}
       <Button>{buttonTitle}</Button>
-      <ErrorText>{errorText}</ErrorText>
+      {errorText && <ErrorText role='alert'>{errorText}</ErrorText>}
       {isSubmitting && <LoadingText>Loading...</LoadingText>}
     </Base>
   );
