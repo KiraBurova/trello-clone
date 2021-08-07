@@ -24,7 +24,6 @@ export const Title = styled.h2`
 
 export const Input = styled.input`
   padding: 0.625em;
-  margin-bottom: 1.5625em;
   border: none;
   border-radius: var(--radius);
   font-size: 1rem;

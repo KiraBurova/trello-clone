@@ -6,63 +6,43 @@ import { Container } from './styles/sigup';
 
 import firebase from '../../lib/firebase.prod';
 
-import useMakeAsyncCall from '../../hooks/useMakeAsyncCall';
-
-import { checkIfFormIsValid } from '../../helpers';
 import { ROUTES } from '../../constants';
 
 const SignUpScreen = () => {
   const history = useHistory();
-  const [formValues, setFormValues] = useState({});
-  const isValid = checkIfFormIsValid(formValues);
-  const { error, isLoading, fetchData } = useMakeAsyncCall({
-    asyncFunctionToRun: () => signUpUser(),
-    runOnMount: false,
-  });
+  const [error, setError] = useState('');
 
-  const signUpUser = () => {
-    const { email, password } = formValues;
-    return new Promise((resolve, reject) => {
-      return firebase
-        .auth()
-        .createUserWithEmailAndPassword(email, password)
-        .then((userCredentials) => {
-          const userId = userCredentials.user.uid;
-          const userData = { email, uid: userId };
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(userId)
-            .set(userData)
-            .then(() => {
-              resolve(userId);
-              history.push(ROUTES.SIGNIN);
-            })
-            .catch((error) => reject(error));
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  const signUpUser = (data) => {
+    const { email, password } = data;
+    return firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredentials) => {
+        const userId = userCredentials.user.uid;
+        const userData = { email, uid: userId };
+        firebase
+          .firestore()
+          .collection('users')
+          .doc(userId)
+          .set(userData)
+          .then(() => {
+            history.push(ROUTES.SIGNIN);
+          })
+          .catch((error) => setError(error.message));
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
   };
 
-  const handleSumbit = (e) => {
-    e.preventDefault();
-    fetchData();
-  };
-
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    });
+  const handleSumbit = (data, event) => {
+    event.preventDefault();
+    signUpUser(data);
   };
 
   return (
     <Container>
-      <Form handleOnChange={handleOnChange} handleSumbit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error.message} loading={isLoading} isValid={isValid} />
+      <Form onSubmit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error.message} />
     </Container>
   );
 };
