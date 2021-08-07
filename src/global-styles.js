@@ -16,13 +16,16 @@ export const GlobalStyles = createGlobalStyle`
 
         --main-dark: #1E212B;
         --main-light: #FFFFFF;
-        --darken-accent: #07080A;
+        --darken-dark: #07080A;
         --accent: #43AA8B;
+        --darken-accent: #2e7560;
         --additional: #FFC800;
         
         --error: #D63230;
         --disabled: #E8E9EB;
 
         --radius: 5px;
+
+        --transition: 0.2s ease-in-out;
     }
 `;

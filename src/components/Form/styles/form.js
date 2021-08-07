@@ -39,10 +39,10 @@ export const Button = styled.button`
   font-weight: bold;
   font-size: 1.1rem;
   box-sizing: border-box;
-  transition: background-color 0.2s ease-in-out;
+  transition: background-color var(--transition);
 
   &:hover {
-    background-color: var(--darken-accent);
+    background-color: var(--darken-dark);
   }
 
   &:disabled {
