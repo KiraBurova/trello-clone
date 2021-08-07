@@ -7,7 +7,12 @@ import SignIn from './screens/SignIn';
 import Dashboard from './screens/Dashboard';
 import Header from './components/Header';
 
+import ProtectedRoute from './components/ProtectedRoute';
+
+import useAuth from './hooks/useAuth';
+
 const App = () => {
+  const { user } = useAuth();
   return (
     <Router>
       <Header />
@@ -18,9 +23,9 @@ const App = () => {
         <Route exact path={ROUTES.SIGNIN}>
           <SignIn />
         </Route>
-        <Route exact path={ROUTES.DASHBOARD}>
+        <ProtectedRoute user={user} exact path={ROUTES.DASHBOARD}>
           <Dashboard />
-        </Route>
+        </ProtectedRoute>
       </Switch>
     </Router>
   );

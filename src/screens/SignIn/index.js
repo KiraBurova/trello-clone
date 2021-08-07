@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import Form from '../../components/Form';
 import { Container } from './styles/signin';
 
-import firebase from '../../lib/firebase.prod';
+import { signIn } from '../../api/firebase';
 
 import { ROUTES } from '../../constants';
 
@@ -13,17 +13,9 @@ const SignInScreen = () => {
   const [error, setError] = useState('');
 
   const signInUser = (data) => {
-    const { email, password } = data;
-
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        history.push(ROUTES.DASHBOARD);
-      })
-      .catch((error) => {
-        setError(error.message);
-      });
+    signIn(data)
+      .then(() => history.push(ROUTES.DASHBOARD))
+      .catch((error) => setError(error));
   };
 
   const handleSumbit = (data, event) => {

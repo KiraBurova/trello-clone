@@ -15,7 +15,7 @@ export const Logo = styled(ReachRouterLink)`
   text-decoration: none;
 `;
 
-export const LogoutButton = styled(ReachRouterLink)`
+export const LogoutButton = styled.button`
   background-color: var(--accent);
   color: var(--main-light);
   border: 0;
@@ -24,6 +24,7 @@ export const LogoutButton = styled(ReachRouterLink)`
   padding: 0.5em 1.2em;
   text-decoration: none;
   transition: background-color var(--transition);
+  cursor: pointer;
 
   &:hover {
     background: var(--darken-accent);
