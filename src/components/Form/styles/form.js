@@ -24,36 +24,16 @@ export const Title = styled.h2`
 
 export const Input = styled.input`
   padding: 0.625em;
+  margin: 0 0 0.625em 0;
   border: none;
   border-radius: var(--radius);
   font-size: 1rem;
 `;
 
-export const Button = styled.button`
-  cursor: pointer;
-  padding: 0.625em;
-  border-radius: var(--radius);
-  border: none;
-  background-color: var(--main-dark);
-  color: var(--main-light);
-  font-weight: bold;
-  font-size: 1.1rem;
-  box-sizing: border-box;
-  transition: background-color var(--transition);
-
-  &:hover {
-    background-color: var(--darken-dark);
-  }
-
-  &:disabled {
-    background-color: var(--disabled);
-    cursor: default;
-  }
-`;
-
 export const ErrorText = styled.p`
   color: var(--error);
   word-wrap: break-word;
+  margin: 0 0 0.625em 0;
 `;
 
 export const LoadingText = styled.p`

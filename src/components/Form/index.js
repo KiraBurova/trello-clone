@@ -1,9 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Base, Input, Button, Title, ErrorText, LoadingText } from './styles/form';
+import { Base, Input, Title, ErrorText, LoadingText } from './styles/form';
 
-const Form = ({ formTitle, buttonTitle, onSubmit, handleOnChange, errorText }) => {
+import Button from '../Button';
+
+const Form = ({ formTitle, buttonTitle, onSubmit, errorText }) => {
   const {
     register,
     handleSubmit,
