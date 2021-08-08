@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../../components/Button';
 
-import { Container } from './styles/dashboard';
+import { Base, Container } from './styles/dashboard';
+
+import Card from '../../components/Card';
+import Input from '../../components/Input';
 
 const Dashboard = () => {
+  const [dashboardName, setDashboardName] = useState('');
+  const handleCreateDashboard = () => {
+    if (!dashboardName) return;
+  };
+
   return (
-    <Container>
-      <Button>Create dashboard</Button>
-    </Container>
+    <Base>
+      <Card>
+        <Container>
+          <Input placeholder='Create dashboard' handleOnChange={setDashboardName} />
+          <Button handleOnClick={handleCreateDashboard}>Create dashboard</Button>
+        </Container>
+      </Card>
+    </Base>
   );
 };
 
