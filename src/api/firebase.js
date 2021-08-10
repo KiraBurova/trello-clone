@@ -51,3 +51,18 @@ export const logOut = () => {
       .catch((error) => reject(error.message));
   });
 };
+
+export const createBoard = async (boardData) => {
+  const { userId } = boardData;
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('boards')
+      .doc(userId)
+      .set(boardData, { marge: true })
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => reject(error.message));
+  });
+};
