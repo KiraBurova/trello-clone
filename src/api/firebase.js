@@ -53,16 +53,36 @@ export const logOut = () => {
 };
 
 export const createBoard = async (boardData) => {
-  const { userId } = boardData;
+  const { name } = boardData;
   return new Promise((resolve, reject) => {
     firebase
       .firestore()
       .collection('boards')
-      .doc(userId)
-      .set(boardData, { marge: true })
+      .doc(name)
+      .set(boardData, { merge: true })
       .then(() => {
         resolve();
       })
       .catch((error) => reject(error.message));
+  });
+};
+
+export const getCreatedBoards = (userId) => {
+  const boards = [];
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('boards')
+      .where('userId', '==', userId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          boards.push(doc.data());
+          resolve(boards);
+        });
+      })
+      .catch((error) => {
+        reject(error.message);
+      });
   });
 };
