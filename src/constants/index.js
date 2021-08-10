@@ -1,5 +1,6 @@
 export const ROUTES = {
   ROOT: '/',
   SIGNIN: '/signin',
-  DASHBOARD: '/dashboard',
+  BOARDS: '/boards',
+  BOARD: '/boards',
 };

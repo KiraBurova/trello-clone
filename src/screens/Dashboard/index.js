@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../components/Button';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Base, Container, BoardName, Boards } from './styles/dashboard';
 
 import Card from '../../components/Card';
 import Input from '../../components/Input';
+import Button from '../../components/Button';
 
 import useAuth from '../../hooks/useAuth';
 import { createBoard, getCreatedBoards } from '../../api/firebase';
+import { ROUTES } from '../../constants';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -31,6 +33,7 @@ const Dashboard = () => {
     const boardData = {
       userId: user.uid,
       name: boardName,
+      id: uuidv4(),
     };
     createBoard(boardData)
       .then(() => {
@@ -48,7 +51,7 @@ const Dashboard = () => {
         {!!boards.length &&
           boards.map((board) => (
             <Card key={board.name}>
-              <BoardName>{board.name}</BoardName>
+              <BoardName to={`${ROUTES.BOARD}/${board.id}`}>{board.name}</BoardName>
             </Card>
           ))}
       </Boards>

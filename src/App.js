@@ -23,8 +23,11 @@ const App = () => {
         <Route exact path={ROUTES.SIGNIN}>
           <SignIn />
         </Route>
-        <ProtectedRoute user={user} exact path={ROUTES.DASHBOARD}>
+        <ProtectedRoute user={user} exact path={ROUTES.BOARDS}>
           <Dashboard />
+        </ProtectedRoute>
+        <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:name`}>
+          234234
         </ProtectedRoute>
       </Switch>
     </Router>

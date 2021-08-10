@@ -7,5 +7,6 @@ TODO
 - [ ] Ability to add tasks to each list
 - [ ] Add header with logout
 - [ ] Add footer
+- [ ] Add loader
 
 - [ ] Figure out the way to test custom hook and forms that uses it >\_<
