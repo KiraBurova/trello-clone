@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { Base, Container, BoardName, Boards } from './styles/dashboard';
+import { Base, Container, BoardName, BoardsList } from './styles/boards';
 
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -11,7 +11,7 @@ import useAuth from '../../hooks/useAuth';
 import { createBoard, getCreatedBoards } from '../../api/firebase';
 import { ROUTES } from '../../constants';
 
-const Dashboard = () => {
+const Boards = () => {
   const { user } = useAuth();
   const [boardName, setBoardName] = useState('');
   const [error, setError] = useState('');
@@ -34,6 +34,7 @@ const Dashboard = () => {
       userId: user.uid,
       name: boardName,
       id: uuidv4(),
+      lists: [],
     };
     createBoard(boardData)
       .then(() => {
@@ -47,14 +48,14 @@ const Dashboard = () => {
 
   return (
     <Base>
-      <Boards>
+      <BoardsList>
         {!!boards.length &&
           boards.map((board) => (
             <Card key={board.name}>
               <BoardName to={`${ROUTES.BOARD}/${board.id}`}>{board.name}</BoardName>
             </Card>
           ))}
-      </Boards>
+      </BoardsList>
       <Card>
         <Container>
           <Input placeholder='Create board' handleOnChange={setBoardName} value={boardName} />
@@ -68,4 +69,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Boards;

@@ -20,7 +20,7 @@ export const BoardName = styled(ReachRouterLink)`
   justify-content: center;
 `;
 
-export const Boards = styled.div`
+export const BoardsList = styled.div`
   display: flex;
   gap: 15px;
   margin-bottom: 15px;
