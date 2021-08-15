@@ -25,3 +25,9 @@ export const BoardsList = styled.div`
   gap: 15px;
   margin-bottom: 15px;
 `;
+
+export const Error = styled.div`
+  color: var(--error);
+  text-align: center;
+  margin-top: 15px;
+`;

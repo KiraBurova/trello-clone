@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import { v4 as uuidv4 } from 'uuid';
 
-import { Base, Container, BoardName, BoardsList } from './styles/boards';
+import { Base, Container, BoardName, BoardsList, Error } from './styles/boards';
 
 import Card from '../../components/Card';
 import Input from '../../components/Input';
@@ -42,7 +43,7 @@ const Boards = () => {
         handleGetCreatedBoards();
       })
       .catch((error) => {
-        setError(error.message);
+        setError(error);
       });
   };
 
@@ -51,7 +52,7 @@ const Boards = () => {
       <BoardsList>
         {!!boards.length &&
           boards.map((board) => (
-            <Card key={board.name}>
+            <Card key={board.id}>
               <BoardName to={`${ROUTES.BOARD}/${board.id}`}>{board.name}</BoardName>
             </Card>
           ))}
@@ -62,7 +63,7 @@ const Boards = () => {
           <Button type='sumbit' handleOnClick={handleCreateBoard}>
             Create board
           </Button>
-          {error}
+          <Error>{error}</Error>
         </Container>
       </Card>
     </Base>

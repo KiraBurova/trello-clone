@@ -5,6 +5,7 @@ import { ROUTES } from './constants';
 import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Boards from './screens/Boards';
+import Board from './screens/Board';
 import Header from './components/Header';
 
 import ProtectedRoute from './components/ProtectedRoute';
@@ -26,8 +27,8 @@ const App = () => {
         <ProtectedRoute user={user} exact path={ROUTES.BOARDS}>
           <Boards />
         </ProtectedRoute>
-        <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:name`}>
-          234234
+        <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:id`}>
+          <Board />
         </ProtectedRoute>
       </Switch>
     </Router>

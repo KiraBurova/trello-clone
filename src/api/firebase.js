@@ -1,4 +1,5 @@
 import firebase from '../lib/firebase.prod';
+import firebaseApp from 'firebase/app';
 
 export const signUp = (data) => {
   const { email, password } = data;
@@ -53,17 +54,29 @@ export const logOut = () => {
 };
 
 export const createBoard = async (boardData) => {
-  const { name } = boardData;
+  const { id, name } = boardData;
   return new Promise((resolve, reject) => {
+    //:todo break up a little
     firebase
       .firestore()
       .collection('boards')
-      .doc(name)
-      .set(boardData, { merge: true })
-      .then(() => {
-        resolve();
-      })
-      .catch((error) => reject(error.message));
+      .where('name', '==', name)
+      .get()
+      .then((value) => {
+        if (value.docs.length) {
+          reject('Board with this name already exists');
+        } else {
+          firebase
+            .firestore()
+            .collection('boards')
+            .doc(id)
+            .set(boardData)
+            .then(() => {
+              resolve();
+            })
+            .catch((error) => reject(error.message));
+        }
+      });
   });
 };
 
@@ -84,5 +97,32 @@ export const getCreatedBoards = (userId) => {
       .catch((error) => {
         reject(error.message);
       });
+  });
+};
+
+export const createList = async (listData) => {
+  const { boardId } = listData;
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('boards')
+      .where('id', '==', boardId)
+      .get()
+      .then((value) => {
+        if (value.docs.length) {
+          firebase
+            .firestore()
+            .collection('boards')
+            .doc(boardId)
+            .update({
+              lists: firebaseApp.firestore.FieldValue.arrayUnion(listData),
+            })
+            .then(() => {
+              resolve();
+            })
+            .catch((error) => reject(error.message));
+        }
+      })
+      .catch((error) => reject(error.message));
   });
 };
