@@ -126,3 +126,21 @@ export const createList = async (listData) => {
       .catch((error) => reject(error.message));
   });
 };
+
+export const getLists = (boardId) => {
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('boards')
+      .where('id', '==', boardId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          resolve(doc.data().lists);
+        });
+      })
+      .catch((error) => {
+        reject(error.message);
+      });
+  });
+};
