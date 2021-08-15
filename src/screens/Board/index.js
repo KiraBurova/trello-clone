@@ -5,6 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 
+import { Base, List, Lists } from './styles/board';
+
 import { createList, getLists } from '../../api/firebase';
 
 const Board = () => {
@@ -42,16 +44,22 @@ const Board = () => {
   };
 
   return (
-    <div>
+    <Base>
       <Button handleOnClick={handleShowAddingList}>Create new list</Button>
+      <Lists>
+        {lists.length &&
+          lists.map((list) => {
+            return <List key={list.id}>{list.name}</List>;
+          })}
+      </Lists>
       {addingList && (
-        <div>
+        <>
           <Input placeholder='Enter list name' value={listName} handleOnChange={setListName} />
           <Button handleOnClick={handleAddList}>Add list</Button>
-        </div>
+        </>
       )}
       <>{error}</>
-    </div>
+    </Base>
   );
 };
 
