@@ -13,6 +13,8 @@ export const GlobalStyles = createGlobalStyle`
     #root {
         height: 100%;
         font-size: 1rem;
+        display: flex;
+        flex-direction: column;
 
         --main-dark: #1E212B;
         --main-light: #FFFFFF;

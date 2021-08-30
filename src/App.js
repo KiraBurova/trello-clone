@@ -7,6 +7,7 @@ import SignIn from './screens/SignIn';
 import Boards from './screens/Boards';
 import Board from './screens/Board';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -31,6 +32,7 @@ const App = () => {
           <Board />
         </ProtectedRoute>
       </Switch>
+      <Footer />
     </Router>
   );
 };

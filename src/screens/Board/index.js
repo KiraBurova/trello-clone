@@ -49,7 +49,14 @@ const Board = () => {
       <Lists>
         {lists.length &&
           lists.map((list) => {
-            return <List key={list.id}>{list.name}</List>;
+            return (
+              <>
+                <List key={list.id}>
+                  {list.name}
+                  <Input placeholder='Enter new task'></Input>
+                </List>
+              </>
+            );
           })}
       </Lists>
       {addingList && (
