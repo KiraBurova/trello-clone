@@ -3,6 +3,7 @@ import { Link as ReachRouterLink } from 'react-router-dom';
 
 export const Base = styled.div`
   margin: 50px;
+  flex: 1;
 `;
 
 export const Container = styled.div`
