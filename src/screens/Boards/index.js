@@ -25,15 +25,14 @@ const Boards = () => {
   }, []);
 
   const handleGetCreatedBoards = () => {
-    setLoading(true);
     getCreatedBoards(user.uid)
       .then((res) => setBoards(res))
-      .catch((error) => setError(error))
-      .then(() => setLoading(false));
+      .catch((error) => setError(error));
   };
 
   const handleCreateBoard = () => {
     if (!boardName) return;
+    setLoading(true);
     const boardData = {
       userId: user.uid,
       name: boardName,
@@ -47,7 +46,8 @@ const Boards = () => {
       })
       .catch((error) => {
         setError(error);
-      });
+      })
+      .then(() => setLoading(false));
   };
 
   return (
