@@ -28,6 +28,6 @@ export const BoardsList = styled.div`
 
 export const Error = styled.div`
   color: var(--error);
+  font-size: 0.9rem;
   text-align: center;
-  margin-top: 15px;
 `;
