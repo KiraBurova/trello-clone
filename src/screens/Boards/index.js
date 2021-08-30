@@ -66,7 +66,7 @@ const Boards = () => {
           <Button type='sumbit' handleOnClick={handleCreateBoard} isLoading={loading}>
             Create board
           </Button>
-          <Error>{error}</Error>
+          {error && <Error>{error}</Error>}
         </Container>
       </Card>
     </Base>
