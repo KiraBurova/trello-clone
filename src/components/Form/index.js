@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Base, Input, Title, ErrorText, LoadingText } from './styles/form';
+import { Base, Input, Title, ErrorText } from './styles/form';
 
 import Button from '../Button';
 
@@ -19,9 +19,8 @@ const Form = ({ formTitle, buttonTitle, onSubmit, errorText }) => {
       {errors.email && <ErrorText role='alert'>Email is required</ErrorText>}
       <Input {...register('password', { required: true })} placeholder='Password' type='password' />
       {errors.password && <ErrorText role='alert'>Password is required</ErrorText>}
-      <Button>{buttonTitle}</Button>
+      <Button isLoading={isSubmitting}>{buttonTitle}</Button>
       {errorText && <ErrorText role='alert'>{errorText}</ErrorText>}
-      {isSubmitting && <LoadingText>Loading...</LoadingText>}
     </Base>
   );
 };

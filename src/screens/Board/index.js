@@ -14,6 +14,7 @@ const Board = () => {
   const [addingList, setAddingList] = useState(false);
   const [listName, setListName] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [lists, setLists] = useState([]);
 
   useEffect(() => {
@@ -22,9 +23,11 @@ const Board = () => {
   }, []);
 
   const handleGetLists = () => {
+    setLoading(true);
     getLists(id)
       .then((res) => setLists(res))
-      .catch((error) => setError(error));
+      .catch((error) => setError(error))
+      .then(() => setLoading(false));
   };
 
   const handleShowAddingList = () => {
@@ -38,14 +41,18 @@ const Board = () => {
       boardId: id,
       tasks: [],
     };
+    setLoading(true);
     createList(list)
       .then((res) => handleGetLists())
-      .catch((error) => setError(error));
+      .catch((error) => setError(error))
+      .then(() => setLoading(false));
   };
 
   return (
     <Base>
-      <Button handleOnClick={handleShowAddingList}>Create new list</Button>
+      <Button handleOnClick={handleShowAddingList} isLoading={loading}>
+        Create new list
+      </Button>
       <Lists>
         {lists.length &&
           lists.map((list) => {
@@ -62,7 +69,9 @@ const Board = () => {
       {addingList && (
         <>
           <Input placeholder='Enter list name' value={listName} handleOnChange={setListName} />
-          <Button handleOnClick={handleAddList}>Add list</Button>
+          <Button handleOnClick={handleAddList} isLoading={loading}>
+            Add list
+          </Button>
         </>
       )}
       <>{error}</>

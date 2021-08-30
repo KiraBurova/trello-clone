@@ -1,8 +1,12 @@
 import styled from 'styled-components/macro';
 
 export const Base = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   padding: 0.625em;
+  min-height: 44px;
   border-radius: var(--radius);
   border: none;
   background-color: var(--main-dark);

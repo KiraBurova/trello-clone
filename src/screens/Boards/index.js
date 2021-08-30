@@ -16,6 +16,7 @@ const Boards = () => {
   const { user } = useAuth();
   const [boardName, setBoardName] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [boards, setBoards] = useState([]);
 
   useEffect(() => {
@@ -24,9 +25,11 @@ const Boards = () => {
   }, []);
 
   const handleGetCreatedBoards = () => {
+    setLoading(true);
     getCreatedBoards(user.uid)
       .then((res) => setBoards(res))
-      .catch((error) => setError(error));
+      .catch((error) => setError(error))
+      .then(() => setLoading(false));
   };
 
   const handleCreateBoard = () => {
@@ -60,7 +63,7 @@ const Boards = () => {
       <Card>
         <Container>
           <Input placeholder='Create board' handleOnChange={setBoardName} value={boardName} />
-          <Button type='sumbit' handleOnClick={handleCreateBoard}>
+          <Button type='sumbit' handleOnClick={handleCreateBoard} isLoading={loading}>
             Create board
           </Button>
           <Error>{error}</Error>

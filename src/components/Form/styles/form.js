@@ -35,7 +35,3 @@ export const ErrorText = styled.p`
   word-wrap: break-word;
   margin: 0 0 0.625em 0;
 `;
-
-export const LoadingText = styled.p`
-  font-size: 1.2rem;
-`;
