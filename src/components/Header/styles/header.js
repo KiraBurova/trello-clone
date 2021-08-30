@@ -6,11 +6,11 @@ export const Base = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: 20px 50px;
-  border-bottom: 1px solid var(--main-dark);
+  background-color: var(--main-dark);
 `;
 
 export const Logo = styled(ReachRouterLink)`
-  color: var(--main-dark);
+  color: var(--main-light);
   font-size: 2rem;
   text-decoration: none;
 `;
