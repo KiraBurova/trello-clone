@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import { Container } from './App.styles';
+
 import { ROUTES } from './constants';
 
 import SignUp from './screens/SignUp';
@@ -18,20 +20,22 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path={ROUTES.ROOT}>
-          <SignUp />
-        </Route>
-        <Route exact path={ROUTES.SIGNIN}>
-          <SignIn />
-        </Route>
-        <ProtectedRoute user={user} exact path={ROUTES.BOARDS}>
-          <Boards />
-        </ProtectedRoute>
-        <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:id`}>
-          <Board />
-        </ProtectedRoute>
-      </Switch>
+      <Container>
+        <Switch>
+          <Route exact path={ROUTES.ROOT}>
+            <SignUp />
+          </Route>
+          <Route exact path={ROUTES.SIGNIN}>
+            <SignIn />
+          </Route>
+          <ProtectedRoute user={user} exact path={ROUTES.BOARDS}>
+            <Boards />
+          </ProtectedRoute>
+          <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:id`}>
+            <Board />
+          </ProtectedRoute>
+        </Switch>
+      </Container>
       <Footer />
     </Router>
   );
