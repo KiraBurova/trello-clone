@@ -26,5 +26,5 @@ yarn-error.log*
 .nyc_output
 cypress/videos
 cypress/screenshots
-.serviceAccount.json
+serviceAccount.json
 cypress.json
