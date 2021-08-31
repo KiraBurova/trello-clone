@@ -8,7 +8,6 @@
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
-
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
@@ -16,15 +15,9 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-const injectDevServer = require('@cypress/react/plugins/react-scripts');
 
 module.exports = (on, config) => {
   require('@cypress/code-coverage/task')(on, config);
-  injectDevServer(on, config);
 
-  // add other tasks to be registered here
-
-  // IMPORTANT to return the config object
-  // with the any changed environment variables
-  return config;
+  return config; // IMPORTANT to return a config
 };
