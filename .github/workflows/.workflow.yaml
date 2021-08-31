@@ -20,7 +20,7 @@ jobs:
       - name: Install
         run: npm install
 
-      - name Tests
+      - name: Tests
         uses: actions/checkout@v2
         uses: cypress-io/github-action@v2
         with:
