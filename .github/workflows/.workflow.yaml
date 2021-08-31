@@ -20,8 +20,14 @@ jobs:
       - name: Install
         run: npm install
 
-      - name: Tests
-        run: npm run cy:run
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          start: npm start
+          wait-on: 'http://localhost:3000'
+          browser: chrome
+          headless: true
+          name: Tests
 
       - name: Build
         run: npm run build
