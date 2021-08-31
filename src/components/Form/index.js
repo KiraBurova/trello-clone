@@ -14,10 +14,10 @@ const Form = ({ formTitle, buttonTitle, onSubmit, errorText }) => {
 
   return (
     <Base onSubmit={handleSubmit(onSubmit)}>
-      <Title>{formTitle}</Title>
-      <Input {...register('email', { required: true })} placeholder='Email' />
+      <Title data-testid={`${formTitle}-title`}>{formTitle}</Title>
+      <Input {...register('email', { required: true })} placeholder='Email' name='email' />
       {errors.email && <ErrorText role='alert'>Email is required</ErrorText>}
-      <Input {...register('password', { required: true })} placeholder='Password' type='password' />
+      <Input {...register('password', { required: true })} placeholder='Password' type='password' name='password' />
       {errors.password && <ErrorText role='alert'>Password is required</ErrorText>}
       <Button isLoading={isSubmitting}>{buttonTitle}</Button>
       {errorText && <ErrorText role='alert'>{errorText}</ErrorText>}

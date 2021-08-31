@@ -1,3 +1,5 @@
+const admin = require('firebase-admin');
+const cypressFirebasePlugin = require('cypress-firebase').plugin;
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -17,7 +19,9 @@
 // eslint-disable-next-line no-unused-vars
 
 module.exports = (on, config) => {
+  const extendedConfig = cypressFirebasePlugin(on, config, admin);
+
   require('@cypress/code-coverage/task')(on, config);
 
-  return config; // IMPORTANT to return a config
+  return { ...config, extendedConfig };
 };

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { CypressHistorySupport } from 'cypress-react-router';
 
 import { Container } from './App.styles';
 
@@ -19,6 +20,7 @@ const App = () => {
   const { user } = useAuth();
   return (
     <Router>
+      <CypressHistorySupport />
       <Header />
       <Container>
         <Switch>
