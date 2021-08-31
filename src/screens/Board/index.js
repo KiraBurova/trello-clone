@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import Scrollbars from 'rc-scrollbars';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
+import Card from '../../components/Card';
 
-import { Base, List, Lists } from './styles/board';
+import { Base, List, Lists, ButtonContainer, NewListContainer, TaskActionsContainer } from './styles/board';
 
 import { createList, getLists } from '../../api/firebase';
 
@@ -13,6 +15,7 @@ const Board = () => {
   const { id } = useParams();
   const [addingList, setAddingList] = useState(false);
   const [listName, setListName] = useState('');
+  const [taskName, setTaskName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [lists, setLists] = useState([]);
@@ -35,12 +38,15 @@ const Board = () => {
   };
 
   const handleAddList = () => {
+    if (!listName) return;
+
     const list = {
       name: listName,
       id: uuidv4(),
       boardId: id,
       tasks: [],
     };
+
     setLoading(true);
     createList(list)
       .then((res) => handleGetLists())
@@ -48,33 +54,51 @@ const Board = () => {
       .then(() => setLoading(false));
   };
 
+  const handleAddTask = () => {
+    if (!taskName) return;
+
+    const task = {
+      name: taskName,
+      id: uuidv4(),
+    };
+  };
+
   return (
     <Base>
-      <Button handleOnClick={handleShowAddingList} isLoading={loading}>
-        Create new list
-      </Button>
-      <Lists>
-        {lists.length &&
-          lists.map((list) => {
-            return (
-              <>
-                <List key={list.id}>
-                  {list.name}
-                  <Input placeholder='Enter new task'></Input>
-                </List>
-              </>
-            );
-          })}
-      </Lists>
-      {addingList && (
-        <>
-          <Input placeholder='Enter list name' value={listName} handleOnChange={setListName} />
-          <Button handleOnClick={handleAddList} isLoading={loading}>
-            Add list
+      <Scrollbars>
+        <ButtonContainer>
+          <Button handleOnClick={handleShowAddingList} isLoading={loading}>
+            Create new list
           </Button>
-        </>
-      )}
-      <>{error}</>
+        </ButtonContainer>
+        <Lists>
+          {!!lists.length &&
+            lists.map((list) => {
+              return (
+                <Card>
+                  <List key={list.id}>
+                    {list.name}
+                    <TaskActionsContainer>
+                      <Input placeholder='Enter new task' value={taskName} handleOnChange={setTaskName}></Input>
+                      <Button handleOnClick={handleAddTask}>Add</Button>
+                    </TaskActionsContainer>
+                  </List>
+                </Card>
+              );
+            })}
+        </Lists>
+        {addingList && (
+          <Card>
+            <NewListContainer>
+              <Input placeholder='Enter list name' value={listName} handleOnChange={setListName} />
+              <Button handleOnClick={handleAddList} isLoading={loading}>
+                Add list
+              </Button>
+            </NewListContainer>
+          </Card>
+        )}
+        <>{error}</>
+      </Scrollbars>
     </Base>
   );
 };

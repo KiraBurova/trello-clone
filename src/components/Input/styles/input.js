@@ -5,4 +5,5 @@ export const Base = styled.input`
   padding: 0.5em;
   border-radius: var(--radius);
   border: 1px solid var(--main-dark);
+  width: 100%;
 `;
