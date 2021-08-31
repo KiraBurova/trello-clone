@@ -16,10 +16,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/react-hooks": "^7.0.1",
-    "@testing-library/user-event": "^12.8.3",
+    "cypress": "^8.3.1",
     "gh-pages": "^3.2.3"
   },
   "scripts": {
@@ -46,30 +43,6 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "<rootDir>/src/**/*.js",
-      "!<rootDir>/src/**/styles/*.js",
-      "!<rootDir>/src/constants/*.js",
-      "!<rootDir>/src/lib/*.js",
-      "!<rootDir>/src/context/*.js",
-      "!<rootDir>/src/helpers/*.js",
-      "!<rootDir>/src/global-styles.js",
-      "!<rootDir>/src/index.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
-      }
-    },
-    "coverageReporters": [
-      "html",
-      "text"
     ]
   },
   "homepage": "https://kiraburova.github.io/trello-clone"
