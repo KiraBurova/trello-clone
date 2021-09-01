@@ -16,14 +16,4 @@ describe('Renders Sign up Screen', () => {
     }).click();
     cy.findAllByRole('alert').should('have.length', 2);
   });
-  it('sign up with error', () => {
-    cy.findByPlaceholderText(/email/i).type('a@a.com').should('have.value', 'a@a.com');
-    cy.findByPlaceholderText(/password/i)
-      .type('123456')
-      .should('have.value', '123456');
-    cy.findByRole('button', {
-      name: /Sign Up/i,
-    }).click();
-    cy.findAllByRole('alert').should('have.length', 1);
-  });
 });

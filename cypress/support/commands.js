@@ -7,8 +7,8 @@ import { attachCustomCommands } from 'cypress-firebase';
 
 import 'cypress-react-router/add-commands';
 
-const projectId = Cypress.config().FIREBASE_PROJECT_ID;
-const apiKey = Cypress.config().FIREBASE_API_KEY;
+const projectId = Cypress.env('CYPRESS_FIREBASE_PROJECT_ID');
+const apiKey = Cypress.env('CYPRESS_FIREBASE_API_KEY');
 
 const config = {
   apiKey: apiKey,
