@@ -1,6 +1,6 @@
 describe('Logout', () => {
   it('successful logout', () => {
-    const uid = Cypress.env('CYPRESS_TEST_UID');
+    const uid = Cypress.env('TEST_UID');
     cy.login(uid);
 
     cy.visit('/');

@@ -9,7 +9,7 @@ describe('Renders Sign in Screen', () => {
     }).should('exist');
   });
   it('sign in successful', () => {
-    const uid = Cypress.env('CYPRESS_TEST_UID');
+    const uid = Cypress.env('TEST_UID');
     cy.login(uid);
   });
   it('attempts to sign in with empty inputs', () => {
