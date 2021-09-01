@@ -14,7 +14,7 @@ const Form = ({ formTitle, buttonTitle, onSubmit, errorText }) => {
 
   return (
     <Base onSubmit={handleSubmit(onSubmit)}>
-      <Title data-testid={`${formTitle}-title`}>{formTitle}</Title>
+      <Title data-testid='form-title'>{formTitle}</Title>
       <Input {...register('email', { required: true })} placeholder='Email' name='email' />
       {errors.email && <ErrorText role='alert'>Email is required</ErrorText>}
       <Input {...register('password', { required: true })} placeholder='Password' type='password' name='password' />

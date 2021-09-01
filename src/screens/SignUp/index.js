@@ -25,7 +25,7 @@ const SignUpScreen = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error.message} />
+      <Form onSubmit={handleSumbit} buttonTitle='Sign Up' formTitle='Create account' errorText={error} />
     </Container>
   );
 };

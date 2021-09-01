@@ -24,7 +24,7 @@ const App = () => {
       <Header />
       <Container>
         <Switch>
-          <Route exact path={ROUTES.ROOT}>
+          <Route exact path={ROUTES.SIGNUP}>
             <SignUp />
           </Route>
           <Route exact path={ROUTES.SIGNIN}>
