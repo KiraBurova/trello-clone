@@ -30,7 +30,7 @@ const App = () => {
           <Route exact path={ROUTES.SIGNIN}>
             <SignIn />
           </Route>
-          <ProtectedRoute user={user} exact path={ROUTES.BOARDS}>
+          <ProtectedRoute user={user} exact path={ROUTES.ROOT}>
             <Boards />
           </ProtectedRoute>
           <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:id`}>

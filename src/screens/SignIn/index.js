@@ -14,7 +14,7 @@ const SignInScreen = () => {
 
   const signInUser = (data) => {
     signIn(data)
-      .then(() => history.push(ROUTES.BOARDS))
+      .then(() => history.push(ROUTES.ROOT))
       .catch((error) => setError(error));
   };
 
