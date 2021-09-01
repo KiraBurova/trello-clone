@@ -9,7 +9,7 @@ import Card from '../../components/Card';
 
 import { Base, List, Lists, ButtonContainer, NewListContainer, TaskActionsContainer } from './styles/board';
 
-import { createList, getLists } from '../../api/firebase';
+import { createList, getLists, createTask } from '../../api/firebase';
 
 const Board = () => {
   const { id } = useParams();
@@ -49,18 +49,25 @@ const Board = () => {
 
     setLoading(true);
     createList(list)
-      .then((res) => handleGetLists())
+      .then(() => handleGetLists())
       .catch((error) => setError(error))
       .then(() => setLoading(false));
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = (listId) => () => {
     if (!taskName) return;
 
     const task = {
       name: taskName,
       id: uuidv4(),
+      listId: listId,
     };
+
+    setLoading(true);
+    createTask(task, id)
+      .then(() => handleGetLists())
+      .catch((error) => setError(error))
+      .then(() => setLoading(false));
   };
 
   return (
@@ -75,12 +82,12 @@ const Board = () => {
           {!!lists.length &&
             lists.map((list) => {
               return (
-                <Card>
-                  <List key={list.id}>
+                <Card key={list.id}>
+                  <List>
                     {list.name}
                     <TaskActionsContainer>
                       <Input placeholder='Enter new task' value={taskName} handleOnChange={setTaskName}></Input>
-                      <Button handleOnClick={handleAddTask}>Add</Button>
+                      <Button handleOnClick={handleAddTask(list.id)}>Add</Button>
                     </TaskActionsContainer>
                   </List>
                 </Card>

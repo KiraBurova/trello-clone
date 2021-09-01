@@ -144,3 +144,32 @@ export const getLists = (boardId) => {
       });
   });
 };
+
+export const createTask = async (taskData, boardId) => {
+  const { listId } = taskData;
+  return new Promise((resolve, reject) => {
+    firebase
+      .firestore()
+      .collection('boards')
+      .where('id', '==', boardId)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const lists = doc.data().lists;
+          const neededList = lists.find((list) => list.id === listId);
+          neededList.tasks.push(taskData);
+
+          firebase
+            .firestore()
+            .collection('boards')
+            .doc(boardId)
+            .update({ lists: [neededList] })
+            .then(() => {
+              resolve();
+            })
+            .catch((error) => reject(error.message));
+        });
+      })
+      .catch((error) => reject(error.message));
+  });
+};
