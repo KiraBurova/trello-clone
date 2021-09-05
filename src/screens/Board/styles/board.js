@@ -51,4 +51,5 @@ export const Task = styled.div`
   border-radius: var(--radius);
   padding: 0.3em 0.4em;
   margin-top: 0.5em;
+  background-color: var(--main-light);
 `;

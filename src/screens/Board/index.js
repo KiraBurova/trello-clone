@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Scrollbars from 'rc-scrollbars';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -70,6 +71,8 @@ const Board = () => {
       .then(() => setLoading(false));
   };
 
+  const handleDragEnd = () => {};
+
   return (
     <Base>
       <Scrollbars>
@@ -91,11 +94,24 @@ const Board = () => {
                     </TaskActionsContainer>
                     <TasksContainer>
                       <Scrollbars autoHeight>
-                        {/* <DragDropContext>
-                        <Droppable> */}
-                        {!!list.tasks.length && list.tasks.map((task) => <Task key={task.id}>{task.name}</Task>)}
-                        {/* </Droppable>
-                      </DragDropContext> */}
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                          <Droppable key={list.id} droppableId={`${list.id}`}>
+                            {(provided) => (
+                              <div ref={provided.innerRef} {...provided.droppableProps}>
+                                {!!list.tasks.length &&
+                                  list.tasks.map((task, index) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={index}>
+                                      {(provided) => (
+                                        <Task ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={task.id}>
+                                          {task.name}
+                                        </Task>
+                                      )}
+                                    </Draggable>
+                                  ))}
+                              </div>
+                            )}
+                          </Droppable>
+                        </DragDropContext>
                       </Scrollbars>
                     </TasksContainer>
                   </List>
