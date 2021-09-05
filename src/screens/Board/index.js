@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import Card from '../../components/Card';
 
-import { Base, List, Lists, ButtonContainer, NewListContainer, TaskActionsContainer } from './styles/board';
+import { Base, List, Lists, ButtonContainer, NewListContainer, TaskActionsContainer, TasksContainer, Task, ListName } from './styles/board';
 
 import { createList, getLists, createTask } from '../../api/firebase';
 
@@ -84,11 +84,20 @@ const Board = () => {
               return (
                 <Card key={list.id}>
                   <List>
-                    {list.name}
+                    <ListName>{list.name}</ListName>
                     <TaskActionsContainer>
                       <Input placeholder='Enter new task' value={taskName} handleOnChange={setTaskName}></Input>
                       <Button handleOnClick={handleAddTask(list.id)}>Add</Button>
                     </TaskActionsContainer>
+                    <TasksContainer>
+                      <Scrollbars autoHeight>
+                        {/* <DragDropContext>
+                        <Droppable> */}
+                        {!!list.tasks.length && list.tasks.map((task) => <Task key={task.id}>{task.name}</Task>)}
+                        {/* </Droppable>
+                      </DragDropContext> */}
+                      </Scrollbars>
+                    </TasksContainer>
                   </List>
                 </Card>
               );
