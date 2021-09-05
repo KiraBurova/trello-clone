@@ -14,6 +14,7 @@ export const ButtonContainer = styled.div`
 export const Lists = styled.div`
   display: flex;
   margin-bottom: 1em;
+  gap: 15px;
 `;
 
 export const List = styled.div`
