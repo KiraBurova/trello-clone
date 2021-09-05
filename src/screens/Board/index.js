@@ -11,6 +11,7 @@ import Card from '../../components/Card';
 import { Base, List, Lists, ButtonContainer, NewListContainer, TaskActionsContainer, TasksContainer, Task, ListName } from './styles/board';
 
 import { createList, getLists, createTask } from '../../api/firebase';
+import { moveItemToAnotherList, reorderItems } from '../../helpers/dragAndDrop';
 
 const Board = () => {
   const { id } = useParams();
@@ -71,7 +72,28 @@ const Board = () => {
       .then(() => setLoading(false));
   };
 
-  const handleDragEnd = () => {};
+  const handleDragEnd = (result) => {
+    const { source, destination } = result;
+
+    // dropped outside the list
+    if (!destination) {
+      return;
+    }
+    const sInd = source.droppableId;
+    const dInd = destination.droppableId;
+
+    const list = lists.find(({ id }) => id === sInd);
+
+    if (sInd === dInd) {
+      const reorderedTasks = reorderItems(list.tasks, source.index, destination.index);
+      const newLists = [...lists];
+      const newList = newLists.find(({ id }) => id === sInd);
+      newList.tasks = reorderedTasks;
+      setLists(newLists);
+    } else {
+      // move between lists
+    }
+  };
 
   return (
     <Base>
@@ -95,7 +117,7 @@ const Board = () => {
                     <TasksContainer>
                       <Scrollbars autoHeight>
                         <DragDropContext onDragEnd={handleDragEnd}>
-                          <Droppable key={list.id} droppableId={`${list.id}`}>
+                          <Droppable key={list.id} droppableId={list.id}>
                             {(provided) => (
                               <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {!!list.tasks.length &&
@@ -108,6 +130,7 @@ const Board = () => {
                                       )}
                                     </Draggable>
                                   ))}
+                                {provided.placeholder}
                               </div>
                             )}
                           </Droppable>
