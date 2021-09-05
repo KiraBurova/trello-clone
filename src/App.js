@@ -9,6 +9,7 @@ import SignUp from './screens/SignUp';
 import SignIn from './screens/SignIn';
 import Boards from './screens/Boards';
 import Board from './screens/Board';
+import NotFound from './screens/NotFound';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -36,6 +37,7 @@ const App = () => {
           <ProtectedRoute user={user} exact path={`${ROUTES.BOARD}/:id`}>
             <Board />
           </ProtectedRoute>
+          <Route component={NotFound} />
         </Switch>
       </Container>
       <Footer />
