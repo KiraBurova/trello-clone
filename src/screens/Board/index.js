@@ -74,6 +74,7 @@ const Board = () => {
 
   const handleDragEnd = (result) => {
     const { source, destination } = result;
+    console.log(result);
 
     // dropped outside the list
     if (!destination) {
@@ -91,6 +92,11 @@ const Board = () => {
       newList.tasks = reorderedTasks;
       setLists(newLists);
     } else {
+      const sourceList = lists.find(({ id }) => id === sInd);
+      const destinationList = lists.find(({ id }) => id === dInd);
+      const reorderedTasks = moveItemToAnotherList(sourceList, destinationList, source, destination);
+
+      console.log(result);
       // move between lists
     }
   };
@@ -115,27 +121,27 @@ const Board = () => {
                       <Button handleOnClick={handleAddTask(list.id)}>Add</Button>
                     </TaskActionsContainer>
                     <TasksContainer>
-                      <Scrollbars autoHeight>
-                        <DragDropContext onDragEnd={handleDragEnd}>
-                          <Droppable key={list.id} droppableId={list.id}>
-                            {(provided) => (
-                              <div ref={provided.innerRef} {...provided.droppableProps}>
-                                {!!list.tasks.length &&
-                                  list.tasks.map((task, index) => (
-                                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                                      {(provided) => (
-                                        <Task ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} key={task.id}>
-                                          {task.name}
-                                        </Task>
-                                      )}
-                                    </Draggable>
-                                  ))}
-                                {provided.placeholder}
-                              </div>
-                            )}
-                          </Droppable>
-                        </DragDropContext>
-                      </Scrollbars>
+                      {/* <Scrollbars autoHeight> */}
+                      <DragDropContext onDragEnd={handleDragEnd}>
+                        <Droppable key={list.id} droppableId={list.id}>
+                          {(provided) => (
+                            <div ref={provided.innerRef} {...provided.droppableProps}>
+                              {!!list.tasks.length &&
+                                list.tasks.map((task, index) => (
+                                  <Draggable key={task.id} draggableId={task.id} index={index}>
+                                    {(provided) => (
+                                      <div iv ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                                        {task.name}
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </DragDropContext>
+                      {/* </Scrollbars> */}
                     </TasksContainer>
                   </List>
                 </Card>
@@ -145,7 +151,7 @@ const Board = () => {
         {addingList && (
           <Card>
             <NewListContainer>
-              <Input placeholder='Enter list name' value={listName} handleOnChange={setListName} />
+              <Input placeholder='Enter list name' handleOnChange={setListName} />
               <Button handleOnClick={handleAddList} isLoading={loading}>
                 Add list
               </Button>

@@ -158,12 +158,18 @@ export const createTask = async (taskData, boardId) => {
           const lists = doc.data().lists;
           const neededList = lists.find((list) => list.id === listId);
           neededList.tasks.push(taskData);
+          const newLists = lists.map((list) => {
+            if (list.id === neededList.id) {
+              list = neededList;
+            }
+            return list;
+          });
 
           firebase
             .firestore()
             .collection('boards')
             .doc(boardId)
-            .update({ lists: [neededList] })
+            .update({ lists: newLists })
             .then(() => {
               resolve();
             })

@@ -42,6 +42,7 @@ export const TaskActionsContainer = styled.div`
 
 export const TasksContainer = styled.div`
   width: 100%;
+  height: 100%;
 `;
 
 export const Task = styled.div`
