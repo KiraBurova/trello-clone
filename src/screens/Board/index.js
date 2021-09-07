@@ -74,7 +74,6 @@ const Board = () => {
 
   const handleDragEnd = (result) => {
     const { source, destination } = result;
-    console.log(result);
 
     // dropped outside the list
     if (!destination) {
@@ -92,12 +91,9 @@ const Board = () => {
       newList.tasks = reorderedTasks;
       setLists(newLists);
     } else {
-      const sourceList = lists.find(({ id }) => id === sInd);
-      const destinationList = lists.find(({ id }) => id === dInd);
-      const reorderedTasks = moveItemToAnotherList(sourceList, destinationList, source, destination);
-
-      console.log(result);
-      // move between lists
+      // const sourceList = lists.find(({ id }) => id === sInd);
+      // const destinationList = lists.find(({ id }) => id === dInd);
+      // const reorderedTasks = moveItemToAnotherList(sourceList, destinationList, source, destination);
     }
   };
 
@@ -110,43 +106,49 @@ const Board = () => {
           </Button>
         </ButtonContainer>
         <Lists>
-          {!!lists.length &&
-            lists.map((list) => {
-              return (
-                <Card key={list.id}>
-                  <List>
-                    <ListName>{list.name}</ListName>
-                    <TaskActionsContainer>
-                      <Input placeholder='Enter new task' value={taskName} handleOnChange={setTaskName}></Input>
-                      <Button handleOnClick={handleAddTask(list.id)}>Add</Button>
-                    </TaskActionsContainer>
-                    <TasksContainer>
-                      {/* <Scrollbars autoHeight> */}
-                      <DragDropContext onDragEnd={handleDragEnd}>
-                        <Droppable key={list.id} droppableId={list.id}>
-                          {(provided) => (
-                            <div ref={provided.innerRef} {...provided.droppableProps}>
-                              {!!list.tasks.length &&
-                                list.tasks.map((task, index) => (
-                                  <Draggable key={task.id} draggableId={task.id} index={index}>
-                                    {(provided) => (
-                                      <div iv ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
-                                        {task.name}
-                                      </div>
-                                    )}
-                                  </Draggable>
-                                ))}
-                              {provided.placeholder}
-                            </div>
-                          )}
-                        </Droppable>
-                      </DragDropContext>
-                      {/* </Scrollbars> */}
-                    </TasksContainer>
-                  </List>
-                </Card>
-              );
-            })}
+          <DragDropContext onDragEnd={handleDragEnd}>
+            {!!lists.length &&
+              lists.map((list) => {
+                return (
+                  <Card key={list.id}>
+                    <List>
+                      <ListName>{list.name}</ListName>
+                      <TaskActionsContainer>
+                        <Input placeholder='Enter new task' handleOnChange={setTaskName}></Input>
+                        <Button handleOnClick={handleAddTask(list.id)}>Add</Button>
+                      </TaskActionsContainer>
+                      <TasksContainer>
+                        <Scrollbars autoHeight>
+                          <Droppable key={list.id} droppableId={`list - ${list.id}`} style={{ height: '100%' }}>
+                            {(provided) => (
+                              <div ref={provided.innerRef} {...provided.droppableProps}>
+                                {!!list.tasks.length &&
+                                  list.tasks.map((task, index) => (
+                                    <Draggable key={task.id} draggableId={task.id} index={index}>
+                                      {(provided) => {
+                                        const style = {
+                                          marginTop: '0.5em',
+                                          ...provided.draggableProps.style,
+                                        };
+                                        return (
+                                          <div ref={provided.innerRef} {...provided.draggableProps} style={style} {...provided.dragHandleProps}>
+                                            <Task>{task.name}</Task>
+                                          </div>
+                                        );
+                                      }}
+                                    </Draggable>
+                                  ))}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </Scrollbars>
+                      </TasksContainer>
+                    </List>
+                  </Card>
+                );
+              })}
+          </DragDropContext>
         </Lists>
         {addingList && (
           <Card>
